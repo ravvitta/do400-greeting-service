@@ -20,6 +20,15 @@ pipeline{
                 sh "npm test"
             }
         }
+	
+	stage('Release') {
+           steps {
+               sh '''
+               oc project ravivittal-s2i
+               oc start-build greeting-console  --follow --wait
+               '''
+           }
+        }
 
         // Add the "Deploy" stage here
     }
